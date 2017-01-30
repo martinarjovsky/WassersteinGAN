@@ -39,7 +39,6 @@ parser.add_argument('--Diters', type=int, default=5, help='number of D iters per
 parser.add_argument('--noBN', action='store_true', help='use batchnorm or not (only for DCGAN)')
 parser.add_argument('--mlp_G', action='store_true', help='use MLP for G')
 parser.add_argument('--mlp_D', action='store_true', help='use MLP for D')
-parser.add_argument('--grad_bound', type=float, default=1e10, help='Keep training the disc until the norm of its gradient is below this')
 parser.add_argument('--n_extra_layers', type=int, default=0, help='Number of extra layers on gen and disc')
 parser.add_argument('--experiment', default=None, help='Where to store samples and models')
 parser.add_argument('--adam', action='store_true', help='Whether to use adam (default is rmsprop)')
@@ -171,9 +170,8 @@ for epoch in range(opt.niter):
             Diters = 100
         else:
             Diters = opt.Diters
-        grad_D_norm = 0
         j = 0
-        while (j < Diters or grad_D_norm > opt.grad_bound) and i < len(dataloader):
+        while j < Diters and i < len(dataloader):
             j += 1
 
             # clamp parameters to a cube
