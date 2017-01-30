@@ -116,10 +116,7 @@ if opt.netG != '': # load checkpoint if needed
     netG.load_state_dict(torch.load(opt.netG))
 print(netG)
 
-if opt.noBN:
-    netD = dcgan.DCGAN_D_nobn(opt.imageSize, nz, nc, ndf, ngpu, n_extra_layers)
-    netD.apply(weights_init)
-elif opt.mlp_D:
+if opt.mlp_D:
     netD = mlp.MLP_D(opt.imageSize, nz, nc, ndf, ngpu)
 else:
     netD = dcgan.DCGAN_D(opt.imageSize, nz, nc, ndf, ngpu, n_extra_layers)
