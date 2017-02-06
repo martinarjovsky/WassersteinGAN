@@ -203,6 +203,9 @@ for epoch in range(opt.niter):
         for p in netD.parameters():
             p.requires_grad = False # to avoid computation
         netG.zero_grad()
+        # in case our last batch was the tail batch of the dataloader,
+        # make sure we feed a full batch of noise
+        noise.data.resize_(opt.batchSize, nz, 1, 1)
         noise.data.normal_(0, 1)
         fake = netG(noise)
         errG = netD(fake)
