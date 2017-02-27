@@ -139,10 +139,6 @@ if opt.cuda:
     one, mone = one.cuda(), mone.cuda()
     noise, fixed_noise = noise.cuda(), fixed_noise.cuda()
 
-input = Variable(input)
-noise = Variable(noise)
-fixed_noise = Variable(fixed_noise)
-
 # setup optimizer
 if opt.adam:
     optimizerD = optim.Adam(netD.parameters(), lr=opt.lrD, betas=(opt.beta1, 0.999))
