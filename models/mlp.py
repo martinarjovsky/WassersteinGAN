@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import torch
 import torch.nn as nn
 
-class MLP_G(nn.Container):
+class MLP_G(nn.Module):
     def __init__(self, isize, nz, nc, ngf, ngpu):
         super(MLP_G, self).__init__()
         self.ngpu = ngpu
@@ -34,7 +34,7 @@ class MLP_G(nn.Container):
         return out.view(out.size(0), self.nc, self.isize, self.isize)
 
 
-class MLP_D(nn.Container):
+class MLP_D(nn.Module):
     def __init__(self, isize, nz, nc, ndf, ngpu):
         super(MLP_D, self).__init__()
         self.ngpu = ngpu
