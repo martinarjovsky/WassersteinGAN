@@ -178,7 +178,8 @@ for epoch in range(opt.niter):
             real_cpu, _ = data
             netD.zero_grad()
             batch_size = real_cpu.size(0)
-            
+
+            input.resize_as_(real_cpu).copy_(real_cpu)
             inputv = Variable(input)
 
             errD_real = netD(inputv)
