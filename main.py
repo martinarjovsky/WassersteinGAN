@@ -214,8 +214,8 @@ for epoch in range(opt.niter):
         optimizerG.step()
         gen_iterations += 1
 
-        print('[%d/%d][%d/%d] Loss_D: %f Loss_G: %f Loss_D_real: %f Loss_D_fake %f'
-            % (epoch, opt.niter, gen_iterations, len(dataloader),
+        print('[%d/%d][%d/%d][%d] Loss_D: %f Loss_G: %f Loss_D_real: %f Loss_D_fake %f'
+            % (epoch, opt.niter, i, len(dataloader), gen_iterations,
             errD.data[0], errG.data[0], errD_real.data[0], errD_fake.data[0]))
         if gen_iterations % 500 == 0:
             vutils.save_image(real_cpu, '{0}/real_samples.png'.format(opt.experiment))
