@@ -22,6 +22,7 @@ parser.add_argument('--dataroot', required=True, help='path to dataset')
 parser.add_argument('--workers', type=int, help='number of data loading workers', default=2)
 parser.add_argument('--batchSize', type=int, default=64, help='input batch size')
 parser.add_argument('--imageSize', type=int, default=64, help='the height / width of the input image to network')
+parser.add_argument('--nc', type=int, default=3, help='input image channels')
 parser.add_argument('--nz', type=int, default=100, help='size of the latent z vector')
 parser.add_argument('--ngf', type=int, default=64)
 parser.add_argument('--ndf', type=int, default=64)
@@ -92,7 +93,7 @@ ngpu = int(opt.ngpu)
 nz = int(opt.nz)
 ngf = int(opt.ngf)
 ndf = int(opt.ndf)
-nc = 3
+nc = int(opt.nc)
 n_extra_layers = int(opt.n_extra_layers)
 
 # custom weights initialization called on netG and netD
