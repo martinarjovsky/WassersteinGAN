@@ -190,10 +190,9 @@ for epoch in range(opt.niter):
 
             # train with fake
             noise.resize_(opt.batchSize, nz, 1, 1).normal_(0, 1)
-            noisev = Variable(noise)
-            fake = netG(noisev)
+            noisev = Variable(noise, volatile = True) # totally freeze netG
+            fake = Variable(netG(noisev).data)
             inputv = fake
-            inputv.detach()
             errD_fake = netD(inputv)
             errD_fake.backward(mone)
             errD = errD_real - errD_fake
