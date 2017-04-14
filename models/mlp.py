@@ -31,7 +31,7 @@ class MLP_G(nn.Module):
             output = nn.parallel.data_parallel(self.main, input, range(self.ngpu))
         else:
             output = self.main(input)
-        return output.view(out.size(0), self.nc, self.isize, self.isize)
+        return output.view(output.size(0), self.nc, self.isize, self.isize)
 
 
 class MLP_D(nn.Module):
