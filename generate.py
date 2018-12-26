@@ -56,7 +56,8 @@ if __name__=="__main__":
         netG.cuda()
         fixed_noise = fixed_noise.cuda()
 
-    fake = netG(Variable(fixed_noise, volatile=True))
+    fake = netG(fixed_noise)
     fake.data = fake.data.mul(0.5).add(0.5)
 
-    vutils.save_image(fake.data, os.path.join(opt.output_dir, "generated.png"))
+    for i in range(opt.nimages):
+        vutils.save_image(fake.data[i, ...].reshape((1, nc, imageSize, imageSize)), os.path.join(opt.output_dir, "generated_%02d.png"%i))
